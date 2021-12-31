@@ -23,7 +23,7 @@ router.get('/live', function (req, res, next) {
       }
     })
     res.json({
-      data:filterCrypto
+      data:{...filterCrypto}
     });
   })
   .catch(function (error) {
