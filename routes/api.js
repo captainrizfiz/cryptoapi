@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios')
-
+// https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD,JPY,INR
 /* GET home page. */
 router.get('/live', function (req, res, next) {
   const { access_key, currencies, source, format } = req.query
