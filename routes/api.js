@@ -25,15 +25,14 @@ router.get('/live', function (req, res, next) {
         "source": response.data.base,
         "quotes": livePrice
       }
-      res.json(result);
-
+      res.status(201).json(result);
     })
     .catch(function (error) {
       res.json({
         "success":false,
         "error":{
           "code":106,
-          "info":"You have exceeded the maximum rate limitation allowed on your subscription plan. Please refer to the \"Rate Limits\" section of the API Documentation for details. "
+          "info":"Your subscription plan  expire."
         }
       });
     })
