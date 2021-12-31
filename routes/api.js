@@ -7,16 +7,19 @@ router.get('/live', function (req, res, next) {
   const { access_key, currencies, source, format } = req.query
   axios.get(`https://api.exchangerate-api.com/v4/latest/${source}`)
     .then(function (response) {
-      const mycurrencies = currencies.split(",");
       const price = response.data.rates;
-      const filterPrice = mycurrencies.map(key=>{
-        return {[source+key]:price[key]}
-      })
-      const livePrice = filterPrice.reduce(function(result, item) {
-        var key = Object.keys(item)[0]; //first property: a, b, c
-        result[key] = item[key];
-        return result;
-      }, {});
+      var output = Object.keys(price).map(function (i) {
+        return [{ [source + i]: price[i] }];
+      });
+      function arr2obj(arr) {
+        return arr.map((acc) => {
+          return acc[0];
+        },
+          {}
+        );
+      }
+      const priceOb = arr2obj(output)
+      const livePrice = Object.assign({}, ...priceOb);
       const result = {
         "success": true,
         "terms": "https:\/\/currencylayer.com\/terms",
@@ -25,14 +28,14 @@ router.get('/live', function (req, res, next) {
         "source": response.data.base,
         "quotes": livePrice
       }
-      res.status(201).json(result);
+      res.json(result);
     })
     .catch(function (error) {
       res.json({
-        "success":false,
-        "error":{
-          "code":106,
-          "info":"Your subscription plan  expire."
+        "success": false,
+        "error": {
+          "code": 106,
+          "info": "You have exceeded the maximum rate limitation allowed on your subscription plan."
         }
       });
     })
