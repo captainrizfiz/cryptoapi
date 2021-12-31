@@ -15,7 +15,7 @@ router.get('/live', function (req, res, next) {
             name: val.name,
             slug: val.name,
             quote: {
-              [val.symbol.toLocaleUpperCase()]: {
+              [source.toLocaleUpperCase()]: {
                 price: val.current_price,
               }
             }
