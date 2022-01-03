@@ -5,11 +5,17 @@ const axios = require('axios')
 /* GET home page. */
 router.get('/live', function (req, res, next) {
   const { currencies, source } = req.query
-  console.log(currencies, source );
   axios.get(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${currencies}&tsyms=${source}`)
     .then(function (response) {
+      var data=[]
+      for (const [key, value] of Object.entries(response.data)) {
+       data = [...data,{[key]:{quote:{[source.toLocaleUpperCase()]:{price:value.USD}},symbol:key}}];
+      }
+
+      const liveCrypto = Object.assign({}, ...data);
+
       res.json({
-        data:response.data
+        data:liveCrypto
       });
     })
     .catch(function (error) {
