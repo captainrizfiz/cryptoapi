@@ -9,7 +9,7 @@ router.get('/live', function (req, res, next) {
     .then(function (response) {
       var data=[]
       for (const [key, value] of Object.entries(response.data)) {
-       data = [...data,{[key]:{quote:{USD:value.USD},symbol:key}}];
+       data = [...data,{[key]:{quote:{[source.toLocaleUpperCase()]:{price:value.USD}},symbol:key}}];
       }
 
       const liveCrypto = Object.assign({}, ...data);
