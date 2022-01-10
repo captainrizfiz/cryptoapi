@@ -7,6 +7,7 @@ var logger = require('morgan');
 var apiRouter = require('./routes/api');
 var cryptoRouter = require('./routes/crypto');
 var coinRouter = require('./routes/coin');
+var dataRouter = require('./routes/data');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use(function(req, res, next){
 app.use('/api', apiRouter);
 app.use('/crypto', cryptoRouter);
 app.use('/coin', coinRouter);
+app.use('/data', dataRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
