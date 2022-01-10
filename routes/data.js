@@ -15,4 +15,17 @@ router.get('/top/mktcapfull', function (req, res, next) {
 
 });
 
+
+router.get('/price', function (req, res, next) {
+    const { fsym, tsyms,api_key } = req.query
+    res.json({"Response":"Error","Message":"cccagg_or_exchange market does not exist for this coin pair (%S-USD)","HasWarning":false,"Type":1,"RateLimit":{},"Data":{},"Cooldown":0});
+  
+});
+  
+
+router.get('/v2/histominute', function (req, res, next) {
+    const { fsym, tsyms,api_key,limit } = req.query
+    res.json({"Response":"Error","Message":"CCCAGG market does not exist for this coin pair (%S-USD)","HasWarning":false,"Type":1,"RateLimit":{},"Data":{},"Cooldown":0});
+  
+});
 module.exports = router;
