@@ -30,12 +30,15 @@ router.get('/price', function (req, res, next) {
 
 router.get('/v2/histominute', function (req, res, next) {
   const { fsym, tsyms, api_key, limit } = req.query
-  axios.get(`https://min-api.cryptocompare.com/data/v2/histominute?fsym=${fsym}&tsym=${tsyms}&limit=${limit}`)
-    .then(function (response) {
-      res.json(response.data);
+  console.log(req.query);
+  axios.get(`https://min-api.cryptocompare.com/data/v2/histominute?fsym=${fsym}&tsym=USD&limit=60`)
+    .then(function (result) {
+      res.json(result.data);
     })
     .catch(function (error) {
       res.json(error);
+      console.log(error);
+
     })
 
 });
