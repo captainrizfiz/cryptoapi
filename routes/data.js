@@ -18,7 +18,7 @@ router.get('/top/mktcapfull', function (req, res, next) {
 
 router.get('/price', function (req, res, next) {
   const { fsym, tsyms, api_key } = req.query
-  axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${fsym}&tsyms=${tsyms}`)
+  axios.get(`https://min-api.cryptocompare.com/data/price?fsym=${fsym}&tsyms=USD`)
     .then(function (response) {
       res.json(response.data);
     })
